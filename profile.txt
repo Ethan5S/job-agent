@@ -1,0 +1,11 @@
+I have a bachelors degree in statistics and a masters in applied statistics. No experience
+Skills: Statistical Analysis, Machine Learning, Data Preprocessing, Data Visualization
+Software: Expert in R. Experience with Python, Excel, Word, PowerPoint, SAS, SQL.
+Previous Experience: Tutor, Teaching Assistant
+Want: remote, hybrid, in-person, $50,000+. No New York City
+
+"Entry Level Statistician",
+    "Biostatistician",
+    "Research Assistant",
+    "Research Associate",
+    "R programmer"
