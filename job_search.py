@@ -120,6 +120,25 @@ def parse_score(score_text):
             result["apply"] = line.replace("APPLY:", "").strip()
     return result
 
+def generate_cover_letter(job):
+    prompt = f"""
+Write a concise, professional cover letter for this job based on the candidate profile below and the job description.
+Keep it to 3 short paragraphs. Do not include date, address, or "Dear Hiring Manager" header — just the body.
+
+Candidate profile:
+{MY_PROFILE}
+
+Job:
+Title: {job.get('title')}
+Company: {job.get('company_name')}
+Description: {job.get('description', '')[:1500]}
+"""
+    msg = client.messages.create(
+        model="claude-sonnet-4-6",
+        max_tokens=500,
+        messages=[{"role": "user", "content": prompt}]
+    )
+    return msg.content[0].text
 
 def run_agent(queries):
     all_results = []
@@ -134,6 +153,13 @@ def run_agent(queries):
             print(f"  Scoring: {job.get('title')} @ {job.get('company_name')}...")
             score_text = score_job(job)
             parsed = parse_score(score_text)
+            
+            # only generate cover letter for strong matches
+            cover_letter = ""
+            if parsed.get("score", "0") >= "8":
+                print(f"    Generating cover letter...")
+                cover_letter = generate_cover_letter(job)
+
             all_results.append({
                 "title": job.get("title"),
                 "company": job.get("company_name"),
@@ -142,6 +168,7 @@ def run_agent(queries):
                 "reason": parsed.get("reason", ""),
                 "apply": parsed.get("apply", "?"),
                 "link": job.get("related_links", [{}])[0].get("link", ""),
+                "cover_letter": cover_letter,
             })
 
         # Exa search
@@ -180,7 +207,9 @@ def send_email(csv_path, top_jobs):
             body += f"{row['title']} @ {row['company']}\n"
             body += f"Score: {row['score']} | {row['reason']}\n"
             body += f"Link: {row['link']}\n"
-            body += "-" * 40 + "\n"
+            if row.get('cover_letter'):
+                body += f"\nCover Letter Draft:\n{row['cover_letter']}\n"
+            body += "-" * 40 + "\n\n"
 
     msg.attach(MIMEText(body, "plain"))
 
