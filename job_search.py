@@ -27,7 +27,9 @@ Want: remote, hybrid, in-person, $50,000+. Anywhere in the United States except 
 MY_EMAIL = "ethan.straub@icloud.com"  # your email address
 
 QUERIES = [
-    "Biostatistician OR Statistical Analyst OR Research Associate OR Research Assistant OR Actuarial Analyst",
+    "Biostatistician OR Statistician",
+    "Research Associate OR Research Assistant",
+    "Actuarial Analyst OR Statistical Analyst",
 ]
 
 # ============================================================
