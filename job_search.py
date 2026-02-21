@@ -145,7 +145,7 @@ def send_email(csv_path, top_jobs):
         msg.attach(attachment)
 
     with smtplib.SMTP("smtp.mail.me.com", 587) as server:
-    server.starttls()
+        server.starttls()
         server.login(MY_EMAIL, GMAIL_APP_PASSWORD)
         server.sendmail(MY_EMAIL, MY_EMAIL, msg.as_string())
 
