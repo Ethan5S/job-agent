@@ -154,9 +154,13 @@ def send_email(csv_path, top_jobs):
 
 if __name__ == "__main__":
     results = run_agent(QUERIES)
-    df = pd.DataFrame(results)
-    df = df.sort_values("score", ascending=False)
-    df.to_csv("jobs.csv", index=False)
+    
+    if not results:
+        print("No jobs found. Try different search queries.")
+    else:
+        df = pd.DataFrame(results)
+        df = df.sort_values("score", ascending=False)
+        df.to_csv("jobs.csv", index=False)
 
-    top_jobs = df[df["score"].astype(str) >= "7"]
-    send_email("jobs.csv", top_jobs)
+        top_jobs = df[df["score"].astype(str) >= "7"]
+        send_email("jobs.csv", top_jobs)
