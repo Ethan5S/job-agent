@@ -22,7 +22,8 @@ Want: remote, hybrid, in-person, $50,000+. No New York City
 MY_EMAIL = "ethan.straub@icloud.com"  # your email address
 
 QUERIES = [
-    "Biostatistician"
+    "Biostatistician",
+    "Statistical Analyst"
 ]
 
 # ============================================================
