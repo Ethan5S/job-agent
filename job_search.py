@@ -7,6 +7,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
+from exa_py import Exa
 
 # ============================================================
 # EDIT THESE
@@ -54,6 +55,31 @@ def fetch_jobs(query, location="United States", num_results=10):
     results = search.get_dict()
     return results.get("jobs_results", [])[:num_results]
 
+def fetch_jobs_exa(query, num_results=10):
+    exa = Exa(api_key=os.environ["EXA_API_KEY"])
+    results = exa.search_and_contents(
+        query,
+        num_results=num_results,
+        include_domains=[
+            "jobs.apha.org",        # public health jobs
+            "jobs.amstat.org",      # statistics jobs
+            "higheredjobs.com",     # university jobs
+            "usajobs.gov",          # government jobs
+            "biospace.com",         # biotech/pharma jobs
+        ],
+        text={"max_characters": 1000}
+    )
+    
+    jobs = []
+    for result in results.results:
+        jobs.append({
+            "title": result.title,
+            "company_name": "See listing",
+            "location": "See listing",
+            "description": result.text,
+            "related_links": [{"link": result.url}]
+        })
+    return jobs
 
 def score_job(job):
     description = job.get("description", "No description available")[:1500]
@@ -99,7 +125,8 @@ def run_agent(queries):
     all_results = []
 
     for query in queries:
-        print(f"\nSearching: {query}")
+        # Google Jobs search
+        print(f"\nSearching Google Jobs: {query}")
         jobs = fetch_jobs(query)
         print(f"Found {len(jobs)} jobs")
 
@@ -107,7 +134,25 @@ def run_agent(queries):
             print(f"  Scoring: {job.get('title')} @ {job.get('company_name')}...")
             score_text = score_job(job)
             parsed = parse_score(score_text)
+            all_results.append({
+                "title": job.get("title"),
+                "company": job.get("company_name"),
+                "location": job.get("location"),
+                "score": parsed.get("score", "?"),
+                "reason": parsed.get("reason", ""),
+                "apply": parsed.get("apply", "?"),
+                "link": job.get("related_links", [{}])[0].get("link", ""),
+            })
 
+        # Exa search
+        print(f"\nSearching Exa: {query}")
+        exa_jobs = fetch_jobs_exa(query)
+        print(f"Found {len(exa_jobs)} jobs")
+
+        for job in exa_jobs:
+            print(f"  Scoring: {job.get('title')}...")
+            score_text = score_job(job)
+            parsed = parse_score(score_text)
             all_results.append({
                 "title": job.get("title"),
                 "company": job.get("company_name"),
