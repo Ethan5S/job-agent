@@ -156,9 +156,12 @@ def run_agent(queries):
             
             # only generate cover letter for strong matches
             cover_letter = ""
-            if parsed.get("score", "0") >= "8":
-                print(f"    Generating cover letter...")
-                cover_letter = generate_cover_letter(job)
+            try:
+                if int(parsed.get("score", "0")) >= 8:
+                    print(f"    Generating cover letter...")
+                    cover_letter = generate_cover_letter(job)
+            except ValueError:
+                pass
 
             all_results.append({
                 "title": job.get("title"),
