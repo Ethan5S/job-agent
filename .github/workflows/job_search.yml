@@ -26,4 +26,6 @@ jobs:
           SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          EXA_API_KEY: ${{ secrets.EXA_API_KEY }}
         run: python job_search.py
+
