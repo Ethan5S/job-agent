@@ -13,17 +13,20 @@ from email import encoders
 # ============================================================
 
 MY_PROFILE = """I have a bachelors degree in statistics and a masters in applied statistics. No experience
-Skills: Statistical Analysis, Machine Learning, Data Preprocessing, Data Visualization
-Software: Expert in R. Experience with Python, Excel, Word, PowerPoint, SAS, SQL.
-Previous Experience: Tutor, Teaching Assistant
-Want: remote, hybrid, in-person, $50,000+. No New York City
+Skills: Statistical Analysis, Machine Learning, Data Preprocessing, Data Visualization, data management and querying (dplyr and base R), 
+visualization (ggplot2), statistical modeling(regression, A/B testing, GLMs, mixed models...), 
+predictive analysis (Random forest, XGBoost, penalized regression...), 
+bayesian methods (base R, Stan, rstanarm, rjags), Python coding for predictive analysis (ski-kit learn, NumPy, pandas, Keras, tensorflow)
+I passed the society of actuaries SOA Exam P.
+Software: Expert in R. Experience with Python, Excel, Word, PowerPoint, Power BI.
+Previous Experience: Tutor, Teaching Assistant, Dining hall supervisor, home depot lumber associate, arborist, golf course maintenance
+Want: remote, hybrid, in-person, $50,000+. Anywhere in the United States except New York City
 """
 
 MY_EMAIL = "ethan.straub@icloud.com"  # your email address
 
 QUERIES = [
-    "Biostatistician",
-    "Statistical Analyst"
+    "Biostatistician OR Statistical Analyst OR Research Associate OR Research Assistant OR Actuarial Analyst",
 ]
 
 # ============================================================
