@@ -35,6 +35,8 @@ GMAIL_APP_PASSWORD = os.environ["GMAIL_APP_PASSWORD"]
 
 client = anthropic.Anthropic(api_key=ANTHROPIC_KEY)
 
+SERPAPI_KEY = os.environ["SERPAPI_KEY"]
+print(f"SERPAPI_KEY length: {len(SERPAPI_KEY)}")  # ADD THIS - shows length without exposing the key
 
 def fetch_jobs(query, location="United States", num_results=10):
     params = {
