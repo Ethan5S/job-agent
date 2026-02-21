@@ -68,6 +68,17 @@ def fetch_jobs_exa(query, num_results=10):
             "higheredjobs.com",     # university jobs
             "usajobs.gov",          # government jobs
             "biospace.com",         # biotech/pharma jobs
+            "biometricssociety.org",
+            "clinicaltrialsarena.com",
+            "pharmiweb.com",
+            "lifescienceleader.com",
+            "cdc.gov/employment",
+            "chronicle.com/jobs",
+            "nature.com/naturecareers",
+            "actuarialcareers.com",
+            "teamworkonline.com",
+            "linkedin.com/jobs",
+            "sloansportsconference.com",
         ],
         text={"max_characters": 1000}
     )
