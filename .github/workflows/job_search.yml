@@ -1,8 +1,8 @@
 name: Daily Job Search
 
 on:
-  schedule:
-    - cron: "0 15 * * 1,3,5"  # 8am MST, MWF
+#  schedule:
+#    - cron: "0 15 * * 1,3,5"  # 8am MST, MWF
   workflow_dispatch:         # lets you trigger it manually too
 
 jobs:
@@ -28,5 +28,6 @@ jobs:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           EXA_API_KEY: ${{ secrets.EXA_API_KEY }}
         run: python job_search.py
+
 
 
